@@ -5,16 +5,32 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      project_id:
+        description: 'GCP project ID'
+        required: false
+      gke_cluster:
+        description: 'GKE cluster name'
+        required: false
+      gke_zone:
+        description: 'GKE zone or location'
+        required: false
+      deployment_name:
+        description: 'Kubernetes deployment name'
+        required: false
+      workload_identity_provider:
+        description: 'Workload Identity Provider'
+        required: false
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  PROJECT_ID: ${{ github.event.inputs.project_id || secrets.GCP_PROJECT_ID }}
   GAR_LOCATION: 'us-central1'
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}
-  DEPLOYMENT_NAME: ${{ secrets.DEPLOYMENT_NAME }}
+  GKE_CLUSTER: ${{ github.event.inputs.gke_cluster || secrets.GKE_CLUSTER }}
+  GKE_ZONE: ${{ github.event.inputs.gke_zone || secrets.GCP_ZONE }}
+  DEPLOYMENT_NAME: ${{ github.event.inputs.deployment_name || secrets.DEPLOYMENT_NAME }}
   REPOSITORY: 'samples'
   IMAGE: 'static-site'
-  WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+  WORKLOAD_IDENTITY_PROVIDER: ${{ github.event.inputs.workload_identity_provider || secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
 jobs:
   setup-build-publish-deploy:

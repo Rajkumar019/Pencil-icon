@@ -24,6 +24,8 @@ Add the following repository secrets in GitHub Settings → Secrets → Actions:
 - `DEPLOYMENT_NAME`
 - `WORKLOAD_IDENTITY_PROVIDER`
 
+If you want to run the workflow manually, you can also provide values through the workflow dispatch inputs.
+
 ### 2. Enable required Google Cloud APIs
 
 Enable these APIs in your Google Cloud project:
