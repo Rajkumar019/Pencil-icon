@@ -1,0 +1,8 @@
+resources:
+  - deployment.yml
+  - service.yml
+
+images:
+  - name: static-site
+    newName: static-site
+    newTag: latest
