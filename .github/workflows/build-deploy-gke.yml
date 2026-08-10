@@ -28,6 +28,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate required environment variables
+        run: |
+          missing=0
+          for var in PROJECT_ID GKE_CLUSTER GKE_ZONE DEPLOYMENT_NAME WORKLOAD_IDENTITY_PROVIDER; do
+            if [ -z "${!var}" ]; then
+              echo "ERROR: $var is not set"
+              missing=1
+            fi
+          done
+          if [ "$missing" -eq 1 ]; then
+            exit 1
+          fi
+
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
