@@ -26,7 +26,7 @@ env:
   PROJECT_ID: ${{ github.event.inputs.project_id || secrets.GCP_PROJECT_ID }}
   GAR_LOCATION: 'us-central1'
   GKE_CLUSTER: ${{ github.event.inputs.gke_cluster || secrets.GKE_CLUSTER }}
-  GKE_ZONE: ${{ github.event.inputs.gke_zone || secrets.GCP_ZONE }}
+  GKE_ZONE: ${{ github.event.inputs.gke_zone || secrets.GKE_ZONE }}
   DEPLOYMENT_NAME: ${{ github.event.inputs.deployment_name || secrets.DEPLOYMENT_NAME }}
   REPOSITORY: 'samples'
   IMAGE: 'static-site'
